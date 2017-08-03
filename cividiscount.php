@@ -667,7 +667,10 @@ function cividiscount_civicrm_postProcess($class, &$form) {
       // @todo check whether this uses price sets in submit & hence can use same
       // code as the online section and test whether code is decremented when a price set is used.
       $membership_types = $form->getVar('_memTypeSelected');
-      $membership_type = isset($membership_types[0]) ? $membership_types[0] : NULL;
+      //$membership_type = isset($membership_types[0]) ? $membership_types[0] : NULL;
+      //DS: Some times membership type is not vailable in 0th index. E.g incase of backend "submit credit card membership"
+      //DS: reset returns value of first element in array.
+      $membership_type  = reset($membership_types);
 
       if (!$membership_type) {
         $membership_type = $form->getVar('_memType');
